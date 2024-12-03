@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from google.cloud import datastore
 import datetime
+import markdown
 
 
 datastore_client = datastore.Client()
@@ -11,7 +12,8 @@ def store_post(post):
         {
             "status": "public",
             "date": datetime.datetime.now(),
-            "post": post
+            "post": post["post"],
+            "title" : post["title"]
         }
     )
     
@@ -23,7 +25,7 @@ def retrieve_posts():
     
     posts = list(query.fetch())
     
-    print(posts)
+    # print(posts)
     
     return posts
 
@@ -32,18 +34,29 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    posts = retrieve_posts()
+    raw_posts = retrieve_posts()
     
-    return render_template("index.html", posts=posts)
+    rendered_posts = list()
+    
+    for raw_post in raw_posts:
+        if raw_post["post"] == None:
+            post = "<p>Empty Post<p>"
+        else:
+            post = markdown.markdown(raw_post["post"])        
+        title = raw_post.get("title")
+        
+        rendered_posts.append({"title": title, "post": post, "id": raw_post.id})
+    
+    return render_template("index.html", posts=rendered_posts)
 
 @app.route("/post", methods=["GET", "POST"])
 def create():
     if request.method == "POST":
-        # get the post from the form submission
+        # get the title and post from the form submission
+        title = request.form.get("title")
         post = request.form.get("post")
-        print(post)
         
-        store_post(post)
+        store_post({"title": title, "post": post})
         
         return redirect("/")
     else:

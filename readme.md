@@ -35,11 +35,13 @@ For the MVP, I wanted it to have the following functionality:
 
     I wanted a rich text editor for my blog posts and thought about using an external library for this. I explored [quill.js](https://quilljs.com) and [simplemde](https://simplemde.com):
 
-    **quilljs**
+    **[quill.js](https://quilljs.com)**
     Quilljs was easy to setup but storing the data was more complicated and was taking away from building the blog
 
-    **simplemde**
+    **[simplemde](https://simplemde.com)**
     This is a great "drop-in JavaScript textarea replacement and very easy to include
+   
+    This ended up having it's own set of issues. I could store the markdown easily but once again I had to figure out a way to render the markdown as html again. I found an article by [Matt Layman](https://www.mattlayman.com/blog/2023/python-markdown-tailwind-best-buds/) which addresses this issue exactly
 
 
 

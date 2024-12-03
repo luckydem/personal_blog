@@ -4,15 +4,20 @@
     Demian's Blog
 {% endblock %}
 
+<!-- Below block is to dynamically add script and css links for specific pages -->
+{% block links %}
+{% endblock %}
+
 {% block main %}
     <div class="container mx-auto">
         {% for post in posts %}
-
-            <article class="prose">
-                {{ post.post }}
-            </article>
+            <div class="container post my-2 prose" id="{{ post.id }}">
+                <h3>{{ post.title }}</h3>
+                {{ post.post|safe }}
+            </div>
         {% endfor %}
     </div>
-    
+{% endblock %}
 
+{% block scripts %}
 {% endblock %}

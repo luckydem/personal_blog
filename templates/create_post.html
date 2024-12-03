@@ -6,18 +6,35 @@
 
 <!-- Below block is to dynamically add script and css links for specific pages -->
 {% block links %}
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 {% endblock %}
 
 {% block main %}
-    <form action="/post" method="post">
+    <form class="form-control" action="/post" method="post">
         <!-- <div id="post"></div> -->
-        <textarea class="textarea textarea-bordered w-full" placeholder="Blog Post" name="post" id="post"></textarea>
-        <button class="btn" type="submit">SUBMIT</button>
+        <div class="grid grid-cols-2 mb-3">
+            <input class="input input-bordered maxw mr-2" type="text" name="title" placeholder="Post Title" autofocus>
+            <div class="form-control justify-self-end">
+                <label class="label cursor-pointer">
+                    <span class="label-text pr-2">Set post to private</span>
+                    <input type="checkbox" name="private" class="toggle">
+                </label>
+            </div>
+        </div>
+        
+        <textarea class="textarea textarea-bordered w-full mb-2" placeholder="Blog Post" name="post" id="post"></textarea>
+        <button class="btn btn-outline" type="submit">SUBMIT</button>
     </form>
 {% endblock %}
 
 <!-- Below block is to add page specific scripts -->
 {% block scripts %}
+    <script>
+        var simplemde = new SimpleMDE({ 
+            element: document.getElementById("post") ,
+            toolbar: false
+        });
+    </script>
 {% endblock %}
 
