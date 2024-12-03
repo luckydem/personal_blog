@@ -31,6 +31,15 @@ For the MVP, I wanted it to have the following functionality:
     - I am using vs-code as my IDE
     - I am using both python (Flask) and nodejs (tailwindcss) in the backend
     - Eventually I would like to deploy my website and therefore I have decided to use the google cloud environment as I am somewhat familiar with it and found [this](https://cloud.google.com/appengine/docs/standard/python3/building-app) helpful tutorial
+2. **choosing a WYSIWYG editor**
+
+    I wanted a rich text editor for my blog posts and thought about using an external library for this. I explored [quill.js](https://quilljs.com) and [simplemde](https://simplemde.com):
+
+    **quilljs**
+    Quilljs was easy to setup but storing the data was more complicated and was taking away from building the blog
+
+    **simplemde**
+    This is a great "drop-in JavaScript textarea replacement and very easy to include
 
 
 

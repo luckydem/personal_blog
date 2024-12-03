@@ -11,15 +11,26 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='output.css')}}">
+        {% block links %}{% endblock %}
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="container mx-auto px-4">
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <a href="" class="btn btn-ghost text-xl">Demian's Blog</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/post">POST</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-8">
             {% block main %}{% endblock %}
         </div>
         
-        <script src="" async defer></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>

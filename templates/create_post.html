@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+<!-- Below block is to dynamically add script and css links for specific pages -->
+{% block links %}
+
+{% endblock %}
+
+{% block main %}
+    <form action="/post" method="post">
+        <!-- <div id="post"></div> -->
+        <textarea class="textarea textarea-bordered w-full" placeholder="Blog Post" name="post" id="post"></textarea>
+        <button class="btn" type="submit">SUBMIT</button>
+    </form>
+{% endblock %}
+
+<!-- Below block is to add page specific scripts -->
+{% block scripts %}
+{% endblock %}
+
