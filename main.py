@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from google.cloud import datastore
 import datetime
-import markdown
 
 
 datastore_client = datastore.Client()
@@ -40,10 +39,11 @@ def home():
     
     for raw_post in raw_posts:
         if raw_post["post"] == None:
-            post = "<p>Empty Post<p>"
+            post = "Empty Post"
         else:
-            post = markdown.markdown(raw_post["post"])        
-        title = raw_post.get("title")
+            post = raw_post["post"]  
+              
+        title = raw_post.get("title", "Empty Title")
         
         rendered_posts.append({"title": title, "post": post, "id": raw_post.id})
     

@@ -1,4 +1,29 @@
-# CS50 Final Project (MVP)
+# TODO
+- Ensure that blank posts and titles cannot be submitted
+- move data-store into own file with a simple switch to switch between data-store and sql
+- login decorator
+- sql database version 
+- sql authentication
+
+
+# MY PERSONAL BLOG
+#### Video Demo: [youtube-link]()
+#### Description
+A personal blog with the following features:
+
+- **tagging** - The ability to add random tags to my posts and filter posts based on my tags
+- **multiple databases** - There are two branches of this blog:
+    - `sql` - As the name suggests, this is branch holds the code specific to using an sql database
+    - `master` - this branch uses googles firestore (my preferred database for this project as I found it easier to hook up and deploy to a live "mostly free" environment)
+- **authentication** 
+    - For `master` I have used firebase
+    - For `sql` I used 
+- **SEO**
+
+#### Nice to have's:
+
+
+## CS50 Final Project (MVP)
 
 For my final project, I decided to create a personal blog - something I have wanted to setup for a long time. I didn't want to pay for wordpress or any other platform so here was a chance to build this blog with authentication, a simple editor and the ability to set posts to private or public.
 
@@ -19,7 +44,7 @@ For the MVP, I wanted it to have the following functionality:
     - Each "Title" of each post is clickable and a new page is opened to read the whole blog post (I am going to implement dynamic routing a bit like reddit)
 - **Login**
     - (as it's a personal blog, I did not need to create functionality to "register" a user).
-- **Admin dashboard**
+- **Authenticated Home Page**
     - listing all my blog posts by date, and or title 
     - include an edit and delete button next to each post as well as a check box to make them private or public
     - Include an "Add New Post" button to create a new post

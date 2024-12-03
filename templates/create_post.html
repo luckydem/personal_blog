@@ -6,8 +6,6 @@
 
 <!-- Below block is to dynamically add script and css links for specific pages -->
 {% block links %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -23,18 +21,14 @@
             </div>
         </div>
         
-        <textarea class="textarea textarea-bordered w-full mb-2" placeholder="Blog Post" name="post" id="post"></textarea>
+        <textarea class="textarea textarea-bordered w-full mb-3" placeholder="Blog Post" name="post" id="post"></textarea>
+        
+        <a href="/" class="btn btn-outline">CANCEL</a>
         <button class="btn btn-outline" type="submit">SUBMIT</button>
     </form>
 {% endblock %}
 
 <!-- Below block is to add page specific scripts -->
 {% block scripts %}
-    <script>
-        var simplemde = new SimpleMDE({ 
-            element: document.getElementById("post") ,
-            toolbar: false
-        });
-    </script>
 {% endblock %}
 
