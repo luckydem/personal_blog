@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+<!-- Below block is to dynamically add script and css links for specific pages -->
+{% block links %}
+{% endblock %}
+
+{% block main %}
+    <form class="form-control" name="postForm" action="/post" method="post" onsubmit="return validateForm()">
+        <!-- <div id="post"></div> -->
+        <div class="grid grid-cols-2 mb-3">
+            <input class="input input-bordered maxw mr-2" type="text" name="title" placeholder="Post Title" autofocus value="{{title}}">
+            <div class="form-control justify-self-end">
+                <label class="label cursor-pointer">
+                    <span class="label-text pr-2">Set post to private</span>
+                    <input type="checkbox" name="private" class="toggle">
+                </label>
+            </div>
+        </div>
+        
+        <textarea class="textarea textarea-bordered w-full h-96 mb-3" placeholder="Blog Post" name="post" id="post">{{post}}</textarea>
+        
+        <a href="/" class="btn btn-outline btn-secondary mb-2">CANCEL</a>
+        <button class="btn btn-outline btn-primary" id="submit" type="submit">SUBMIT</button>
+    </form>
+
+    
+{% endblock %}
+
+<!-- Below block is to add page specific scripts -->
+{% block scripts %}
+
+    <dialog id="alertModal" class="modal">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Name and Blog post cannot be blank</h3>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    
+    <script>
+        function validateForm(showAlert = true) {
+
+            const form = document.forms["postForm"]
+            const title = form["title"].value
+            const post = form["post"].value                           
+
+            if ( (title === "" || post === "") && showAlert) {
+                
+                const alertModal = document.querySelector("#alertModal")
+                alertModal.showModal()
+
+                return false;
+            }
+        }
+
+        const showAlert = {{ showAlert | tojson | safe }}
+
+        console.log("showAlert: ", showAlert)
+
+        validateForm(showAlert);
+    </script>
+{% endblock %}
+
