@@ -11,9 +11,9 @@
   - [X] Sign in with Google
   - [X] Sign in with Email
     - [ ] ChatGPT suggested a server side (python) check of the token. Not sure if this is necessary but I will look into this
-- [ ] ensure that only users that are registered in the datastore database can be authenticated and not "any" google account
+- [X] ensure that only users that are registered in the datastore database can be authenticated and not "any" google account
 - [ ] Create script to empty datastore
-- [ ] Create a script to create lorem ipsum posts
+- [X] Create a script to populate database
 - [ ] sql
   - [ ] implement an sql database version
     - [ ] store posts 
@@ -24,6 +24,12 @@
 - [ ] Truncate long blog posts and add the ability for a user to click on the post to view the entire post
 - [ ] Add ability to upload pictures for a post
 - [X] Toggle Public / Private Posts
+- [ ] Add Tagging feature
+- [ ] Add token and session storage on server side and not on client side
+  - [ ] implement flasks session and store token in flasks session instead of a cookie on the client.
+  - [ ] wrap every call with a session verification function
+  - [ ] add more security using google secret manager and .env files (python-dotenv)
+- [X] Implement Edit and Delete Post for logged in users
 
 # DEV NOTES
 
@@ -43,27 +49,23 @@
 
   Your active configuration is: [default]
 
-* Check configurations:
+* Check gcloud configurations:
 
   ```bash
   $ gcloud config configurations list
-  NAME                   IS_ACTIVE  ACCOUNT                  PROJECT                COMPUTE_DEFAULT_ZONE  COMPUTE_DEFAULT_REGION
-  default                False      demianhauptle@gmail.com  duhworks               us-central1-c         us-central1
-  my-personal-blog-cs50  True       demianhauptle@gmail.com  my-personal-blog-cs50
   ```
 
 * Activate configuration for duhworks: 
   ```bash
-  $ gcloud config configurations activate my-personal-blog-cs50
+  $ gcloud config configurations activate {project-name}
   ```
+
 * Activate ADC (Application Default Credentials): 
-  
   ```bash
-  $ gcloud auth application-default set-quota-project my-personal-blog-cs50
+  $ gcloud auth application-default set-quota-project {project-name}
   ```
 
 * Check active project: 
-
   ```bash
   gcloud config get-value project
   ```
@@ -169,19 +171,19 @@ For the MVP, I wanted it to have the following functionality:
 5. **Authentication**   
       I spent a bit of time with the same [google](https://cloud.google.com/appengine/docs/standard/python3/building-app) tutorial trying to get the authentication correct but I found that there were some recommendations in using npm modules etc for production and I didn't really want to start implementing that at this point - I felt it was detracting from getting the mvp working (I know I can implement it later if necessary when I want to add more features).  
       
-      
       I also searched the web for a python module that I could use for firebase authentication using google as well as email and password.
       The only library that I found was called pyrebase and it is like 9 years old and only limited to email and password authentication so I decided to use the firebase-auth-ui javascript library which worked well initially but then I realised that the styling was messing with tailwindcss and daisyui styling so I decided to implement it without the firebase-ui library.
       I achieved this all on the client side with JavaScript but I'm still not 100% sure if it is production safe.
       
-
       The next step is to only allow "registered" users to post. Currently I can just login with any google account which is not good. There are a few ways that I can think of to implement this. 
 
       For starters, I'm going to just add a new data "kind" in the google datastore with one "user" entry and if the user_id matches the one in the database, allow the user to be authenticated. 
+      
       That means that I have to add a check for this in the `onAuthStateChanged` function - I haven't done this yet but I added some authentication checks in the python functions so even if a user is "logged in" according to firebase auth, the user will still not see "restricted" pages and data.
 
+      I've realised that using python / Flask with firebase plus using googles datastore seems a bit backwards. The intigration doesn't seem as fluid as I thought. I have learnt a lot though and I think my code is relatively secure
 
-
+      Okay so I'm going to have to change my approach and store the idToken on the server as part of flasks session - that way it cannot be hampered with and there is not "cookie" that can be messed with. Let me see if I can implement that.
 
 # Resources
 

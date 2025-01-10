@@ -1,0 +1,178 @@
+[
+    {
+        "title": "A Fresh Idea for Kudu",
+        "post": "Today, I had a breakthrough while thinking about new features for Kudu Management Systems. I’m excited about integrating some AI capabilities to streamline production planning. It feels like the right direction to stay ahead of the curve.",
+        "private": true,
+        "date": "2025-01-01T09:15:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "First Steps for e-Pod’s Future",
+        "post": "Started brainstorming how e-pod.app could better serve users in 2025. I think improving UI consistency is key. Maybe it’s time to involve more users in the feedback loop. Feels good to have clarity on this.",
+        "private": false,
+        "date": "2025-01-02T15:45:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Reflecting on Networking",
+        "post": "That networking event really made me appreciate how much potential there is in offering AI solutions to entrepreneurs. I think the free consultation idea resonated with many.",
+        "private": true,
+        "date": "2025-01-03T21:00:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Pace Calculator Concept",
+        "post": "I drafted a rough plan for a single-use pace calculator app today. It’s a small project, but the SEO potential has me really excited. I need to explore monetization options soon.",
+        "private": false,
+        "date": "2025-01-04T11:30:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Blog Privacy Considerations",
+        "post": "I spent time figuring out how to make sure private blog posts on my new site remain truly private. I’m testing out different encryption methods—it’s tricky but important work.",
+        "private": true,
+        "date": "2025-01-05T17:20:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2",
+        "image": "https://images.unsplash.com/photo-1735852434414-4857abd3eaa0?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "title": "Exist-db Exploration",
+        "post": "Spent a few hours diving into eXist-db’s function documentation today. I’m starting to see how AI could assist in generating more accurate XQuery scripts. This could really streamline workflows for developers like me.",
+        "private": false,
+        "date": "2025-01-05T22:00:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Learning and Teaching Boolean Logic",
+        "post": "Teaching Boolean logic to a grade 10 student was a rewarding challenge today. Their curiosity reminded me why I enjoy sharing knowledge. Makes me wonder how else I can mentor others in tech.",
+        "private": true,
+        "date": "2025-01-06T10:30:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Blogging Journey Begins",
+        "post": "CS50 has inspired me to finally start my personal blog. Writing about tech topics feels like a great way to reflect on what I’m learning and share it with others.",
+        "private": false,
+        "date": "2025-01-06T14:00:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Tagging Dropbox Photos",
+        "post": "Had a breakthrough on the Dropbox photo-tagging project. AWS Rekognition’s API is powerful, and integrating it into a clean UI is going smoother than I thought. Can’t wait to see this MVP in action.",
+        "private": false,
+        "date": "2025-01-06T16:45:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Fitness and Core Strength",
+        "post": "Core workouts are starting to pay off! Running 20km a week has been consistent, but now I can feel my core getting stronger. The progress is motivating.",
+        "private": true,
+        "date": "2025-01-06T19:15:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "New Blog Launch Plan",
+        "post": "Today, I mapped out the final steps for launching my blog.\n\nI'm really excited to create a platform where anyone can sign up and share their thoughts. The idea of balancing public and private posts feels empowering—privacy is such an important aspect to maintain in today's online world. \n\nHere's to seeing this dream come to life!",
+        "private": false,
+        "date": "2025-01-06T08:00:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Exploring Tailwind CSS",
+        "post": "I spent the day diving deeper into Tailwind CSS. \n\nThere's something so satisfying about building custom components with utility-first classes. I experimented with `pre-wrap` styles to preserve text formatting—it worked perfectly for rendering diary entries with line breaks intact.\n\nLearning never stops, and I’m here for it!",
+        "private": false,
+        "date": "2025-01-05T15:30:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "CS50 Blog Progress",
+        "post": "The CS50 blog is shaping up nicely. \n\nWriting the first few posts has been a mix of excitement and nerves. I want every article to reflect my learning journey authentically. I'm thinking about adding a section dedicated to GitHub repositories—tracking trends is so fascinating.",
+        "private": true,
+        "date": "2025-01-04T19:15:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "AI Chatbot Ideas",
+        "post": "I had an inspiring chat today about building AI chatbots. \n\nIt’s amazing how these tools can be tailored to entrepreneurs’ unique needs. I’m thinking about refining a generative AI chatbot to help small businesses with tailored advice—something that’s relevant and truly helpful.",
+        "private": true,
+        "date": "2025-01-03T10:45:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Reflections on Networking Events",
+        "post": "Organizing that networking event last year taught me so much. From marketing to managing RSVPs, it was a whirlwind! \n\nThe AI chatbot service voucher was a hit—several entrepreneurs found real value in automating their processes. I'm thinking about how to scale similar events in the future.",
+        "private": false,
+        "date": "2025-01-02T13:00:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Improving Exist-db Workflow",
+        "post": "Exist-db has been a powerful tool, but it’s time to streamline some workflows. \n\nToday, I worked on modifying a range index to be more specific for `purchaseOrder` documents. It’s always a challenge balancing specificity with performance, but I think I’ve struck the right balance.",
+        "private": true,
+        "date": "2025-01-01T17:20:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Single-Use Apps Vision",
+        "post": "I had a breakthrough idea today about single-use apps.\n\nImagine a beautifully designed, SEO-optimized pace calculator—simple, functional, and monetizable. The challenge will be creating something lightweight yet impactful. Time to start sketching ideas!",
+        "private": false,
+        "date": "2024-12-31T09:50:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Digital Products Progress",
+        "post": "Selling digital products online is turning out to be an exciting venture. Templates for applications and printables seem to resonate well with potential buyers. \n\nNext step: refining my store’s design and ensuring smooth checkout processes.",
+        "private": true,
+        "date": "2024-12-30T14:35:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "RAG Chatbot Next Steps",
+        "post": "The RAG chatbot idea keeps evolving. Today, I researched retrieval-augmented generation and its application in small businesses.\n\nThe goal is to provide entrepreneurs with instant, contextual advice. There's so much potential here—it feels like the beginning of something big.",
+        "private": false,
+        "date": "2024-12-29T11:00:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Core Strength Progress",
+        "post": "I’ve been focusing more on core strength exercises lately.\n\nConsistency is key, and I’ve managed to add planks and Russian twists to my routine. It feels rewarding to see progress, even if it’s gradual.",
+        "private": true,
+        "date": "2024-12-28T07:45:00Z",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Unlocking AI for Non-Developers",
+        "post": "Artificial intelligence has long been perceived as the domain of developers and data scientists, but the reality is changing rapidly. Tools like ChatGPT, DALL-E, and others have made AI more accessible, empowering people from all backgrounds to experiment and innovate.\n\nOne of the most exciting developments is the rise of no-code platforms for building AI-driven applications. These platforms allow users to create intelligent chatbots, predictive models, or even art-generation tools without writing a single line of code. This democratization of technology is opening doors for entrepreneurs, educators, and small business owners to harness AI for their unique needs.\n\nHowever, accessibility alone is not enough. For AI to truly reach its potential, we need more community-driven learning resources. Blogs, tutorials, and interactive forums are essential to ensure everyone can explore and deploy these tools effectively. The future of AI isn’t just about technological advancement—it’s about inclusivity and creativity.",
+        "private": false,
+        "date": "2025-01-09T14:45:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "The Art of Building One-Page Apps",
+        "post": "One-page applications (SPAs) are becoming increasingly popular due to their sleek user experience and efficiency. However, building a truly effective SPA requires a balance of performance, design, and functionality. It’s not just about making it visually appealing; the underlying architecture must also support scalability and SEO.\n\nTo start, developers need to focus on minimizing load times. This involves optimizing images, reducing JavaScript bundle sizes, and using tools like lazy loading to improve page speed. Tailwind CSS, for instance, is an excellent framework for creating responsive and lightweight designs without the overhead of traditional CSS libraries.\n\nBut the most overlooked aspect of SPAs is search engine optimization. Since SPAs rely heavily on JavaScript, search engines can struggle to index them properly. Techniques like server-side rendering (SSR) or static site generation (SSG) can bridge this gap, ensuring your app is both user-friendly and discoverable. Ultimately, building an SPA is as much about technical precision as it is about understanding your audience’s needs.",
+        "private": false,
+        "date": "2025-01-09T15:00:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Exploring Exist-db: A Developer’s Journey",
+        "post": "As a developer working extensively with eXist-db, I’ve come to appreciate the flexibility and power of this XML database. Whether it’s managing large datasets or creating web applications, eXist-db provides a robust framework that’s both intuitive and scalable.\n\nOne of the most compelling features of eXist-db is its support for XQuery, a language that allows developers to query and manipulate XML data with precision. For someone like me, who works on structured data-intensive projects, this has been a game-changer. It simplifies complex tasks, like combining multiple XML documents or creating dynamic outputs for web applications.\n\nYet, working with eXist-db isn’t without its challenges. Debugging XQuery scripts, for example, can be daunting without the right tools. That’s why I’ve been exploring ways to build utilities that visualize query execution and improve error reporting. The journey has been rewarding, and I’m excited to see how eXist-db continues to evolve as a tool for modern developers.",
+        "private": true,
+        "date": "2025-01-09T15:30:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "From Ideas to Action: Building Single-Use Apps",
+        "post": "The idea of creating single-use apps is an intriguing one. These applications are designed to solve a specific problem or fulfill a particular niche, making them lightweight, focused, and highly effective. But where do you begin?\n\nStart by identifying a problem that you’re passionate about solving. For instance, in my case, building a pace calculator for runners or a storyboard budgeting tool for filmmakers were natural extensions of my own interests and experiences. When you understand the pain points deeply, you can design an app that truly resonates with users.\n\nOnce the idea is clear, the focus shifts to execution. Using modern frameworks like React or Vue.js can speed up the development process, while Tailwind CSS ensures your design is sleek and responsive. The key is to keep the app simple and intuitive—complexity can deter users. By solving one problem exceptionally well, your single-use app can stand out in a crowded market.",
+        "private": false,
+        "date": "2025-01-09T16:00:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    },
+    {
+        "title": "Harnessing AI to Build Better Blogs",
+        "post": "Blogs have evolved from simple personal journals to powerful tools for communication, education, and marketing. But creating a successful blog involves more than just writing—it requires strategy, consistency, and the right technology.\n\nAI can play a transformative role in blogging. From generating topic ideas to analyzing reader engagement, the possibilities are endless. For example, AI tools can suggest headlines that maximize click-through rates or summarize long articles into bite-sized content for social media.\n\nBut the magic doesn’t end there. Advanced AI models can even analyze trending topics to help you stay ahead of the curve. By combining creativity with machine intelligence, bloggers can not only save time but also reach a wider audience. Whether you’re a seasoned writer or just starting, integrating AI into your workflow could be the key to unlocking your blog’s full potential.",
+        "private": true,
+        "date": "2025-01-09T16:15:00",
+        "userId": "MLOTHzQFEXRQHa4GpMLv2ywiWVv2"
+    }
+]
