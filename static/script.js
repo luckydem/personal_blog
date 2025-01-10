@@ -9,6 +9,12 @@ window.addEventListener('load', function () {
         
     })
 
+    // let sessionCookie = getCookie('token')
+    // console.log("cookie:", sessionCookie)
+    // if (sessionCookie == "") {
+    //   firebase.auth().signOut();
+    // }
+    
     // document.getElementById('sign-out').onclick = function () {
     //   firebase.auth().signOut();
     // };
@@ -33,6 +39,9 @@ window.addEventListener('load', function () {
     // };
   
     firebase.auth().onAuthStateChanged(function (user) {      
+
+      // console.log("onAuthStateChanged")
+
       if (user) {
         console.log(`Signed in as ${user.displayName} (${user.email})`);
         user.getIdToken().then(function (token) {
@@ -41,12 +50,22 @@ window.addEventListener('load', function () {
           // SECURITY NOTE: As cookies can easily be modified, only put the
           // token (which is verified server-side) in a cookie; do not add other
           // user information.
-          document.cookie = "token=" + token;
+
+          cookieToken = getCookie("token")
+          // console.log(`CookieToken: ${cookieToken}`)
+          if(cookieToken == "") {
+            console.log(`Creating cookie token: ${token}`)
+            document.cookie = "token=" + token;
+          }
+
+          
         });
       } else {
         // User is signed out.
         // Clear the token cookie.
+        console.log("removing cookie")
         document.cookie = "token=";
+        
       }
     }, function (error) {
       console.log(error);
@@ -56,6 +75,8 @@ window.addEventListener('load', function () {
     const emailLoginForm = document.querySelector('#login-form')
     emailLoginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
+      const signInModal = document.querySelector("#signInModal")
+      signInModal.removeAttribute("open")
       const email = document.querySelector('#login-email').value;
       const password = document.querySelector('#login-password').value;
 
@@ -73,6 +94,8 @@ window.addEventListener('load', function () {
 
 async function googleSignIn() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  const signInModal = document.querySelector("#signInModal")
+  signInModal.removeAttribute("open")
   try {
       const result = await firebase.auth().signInWithPopup(provider);
       // const idToken = await result.user.getIdToken();
@@ -93,4 +116,21 @@ async function googleSignIn() {
   } catch (error) {
       console.error('Error during Google Sign-In:', error);
   }
+}
+
+function getCookie(cname) {
+
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
