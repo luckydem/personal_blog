@@ -12,9 +12,7 @@
   - [X] Sign in with Email
     - [ ] ChatGPT suggested a server side (python) check of the token. Not sure if this is necessary but I will look into this
 - [X] ensure that only users that are registered in the datastore database can be authenticated and not "any" google account
-- [X] ensure that only users that are registered in the datastore database can be authenticated and not "any" google account
 - [ ] Create script to empty datastore
-- [X] Create a script to populate database
 - [X] Create a script to populate database
 - [ ] sql
   - [ ] implement an sql database version

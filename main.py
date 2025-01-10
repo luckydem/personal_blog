@@ -40,7 +40,6 @@ def home():
     verified = userSignedIn()
     
     raw_posts = retrieve_all_posts()
-    raw_posts = retrieve_all_posts()
     
     rendered_posts = list()
     
