@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 from google.auth.transport import requests
-from datastore.google_datastore import store_post, retrieve_all_posts, retrieve_user, get_post, delete_post
+from extensions.my_firestore import store_post, retrieve_all_posts, retrieve_user, get_post, delete_post
 import google.oauth2.id_token
 
 app = Flask(__name__)
@@ -43,6 +43,9 @@ def home():
     
     for raw_post in raw_posts:
         
+        id = raw_post.id
+        raw_post = raw_post.to_dict()
+        
         if raw_post["post"] == None:
             post = "Empty Post"
         # elif len(raw_post["post"]) > 250:
@@ -57,7 +60,7 @@ def home():
         # print(f"Title: {title}")
         # print(f"Image: {image}")
         
-        post_ready = {"title": title, "post": post, "id": raw_post.id, "date": date, "private": private, "image": image}
+        post_ready = {"title": title, "post": post, "id": id, "date": date, "private": private, "image": image}
         
         if private and verified.get("authenticated"):
             # print(f"private: {private}, verified: {verified.get("authenticated")}")
@@ -126,7 +129,7 @@ def post():
     return resp
     
 # edit/read post
-@app.route("/post/<int:post_id>", methods=["GET"])
+@app.route("/post/<post_id>", methods=["GET"])
 def view_post(post_id):
     
     verified = userSignedIn()
@@ -135,6 +138,12 @@ def view_post(post_id):
     print(f"/post/{post_id}. Authenticated: {authenticated}")
         
     complete_post = get_post(post_id)
+    
+    post_id = complete_post.id
+    complete_post = complete_post.to_dict()
+    
+    complete_post["post_id"] = post_id
+    
     edit = False
     private = False
     
