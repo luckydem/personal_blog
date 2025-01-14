@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .my-badge {
+        @apply border rounded-e-full rounded-s-full m-1 inline-flex justify-center items-center px-2 text-base
+    }
+
+    .my-badge-xs {
+        @apply px-1 text-xs
+    }
+
+    .my-badge-sm {
+        @apply px-1 text-sm
+    }
+
+    .my-badge-lg {
+        @apply px-2 text-lg
+    }
+
+    .my-badge-xl {
+        @apply px-3 text-xl
+    }
+
+    .my-badge-2xl {
+        @apply px-3 text-2xl
+    }
+
+    .my-badge-3xl {
+        @apply px-4 text-3xl
+    }
+
+    .my-badge-4xl {
+        @apply px-4 text-4xl
+    }
+
+    .my-badge-5xl {
+        @apply px-4 py-2 text-5xl
+    }
+
+    .my-badge-6xl {
+        @apply px-4 py-2 text-6xl
+    }
+
+}

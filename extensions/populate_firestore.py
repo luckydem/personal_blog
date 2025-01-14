@@ -1,13 +1,26 @@
-from google.cloud import datastore
+from google.cloud import firestore
 import requests
 import json
 import datetime
 
+
+# The `project` parameter is optional and represents which project the client
+# will act on behalf of. If not supplied, the client falls back to the default
+# project inferred from the environment.
+
+# db = firestore.Client(project="my-personal-blog-cs50")
+
+# doc_ref = db.collection("users").document("demianhauptle")
+# doc_ref.set({"first": "Demian", "last": "Hauptle", "born": 1985})
+
 def populate_blogs():    
 
-    client = datastore.Client()
+    db = firestore.Client()
+    batch = db.batch()
+    
+    # db.collection("posts").document("MLOTHzQFEXRQHa4GpMLv2ywiWVv2")
 
-    upload_list = list()
+    # upload_list = list()
 
     with open("../data/blog_entries.json", 'r') as file:
         data = json.load(file)
@@ -15,17 +28,16 @@ def populate_blogs():
     try:
         
         for i in range(len(data)):
-            e = data[i]
+            post = data[i]
             
-            e["date"] = datetime.datetime.fromisoformat(e["date"])
+            post["date"] = datetime.datetime.fromisoformat(post["date"])
             
-            e["image"] = e.get("image", get_unsplash_image())
+            post["image"] = post.get("image", get_unsplash_image())
                     
-            entry = datastore.Entity(client.key("post"))
-            entry.update(e)
-            upload_list.append(entry)
+            document = db.collection("posts").document()
+            batch.set(document, post)
             
-        client.put_multi(upload_list)
+        batch.commit()
     
         return "populated successfully"
     

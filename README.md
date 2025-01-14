@@ -30,6 +30,8 @@
   - [ ] wrap every call with a session verification function
   - [ ] add more security using google secret manager and .env files (python-dotenv)
 - [X] Implement Edit and Delete Post for logged in users
+- [X] Migrate from "firestore in datastore" mode to "native firestore"
+
 
 # DEV NOTES
 
@@ -136,6 +138,8 @@ For the MVP, I wanted it to have the following functionality:
 
     After clearing out all my test posts, I ran into an error where the datastore complained that I could not "order" the posts in ascending or descending if there was not index applied. This confused me to start off with and then I realised that there is an automatic index created when the database is not empty. Therefore I had to implement a check to see if the database was not empty. 
     To do this, with the help of google and chatGPT, I queried the database with a limit of 1 and only queried the keys to optimise the query. if the query returned more than zero entities, I would then get all entities otherwise I would return empty. This way the ordering of an empty query does not happen.
+
+    I read a lot about using datastore (firestore in datastore mode) vs native firestore and since I'm using firebase auth already, it made a lot of sense to migrate from datastore to firestore native. This was a lot easier than I thought and only had to change a few lines of code. Firestore is a lote more intuitive and actually returns my queries a lot faster too. 
 
 3. **choosing a WYSIWYG editor for post submission**
 
