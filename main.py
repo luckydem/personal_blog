@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for, make_response, session
 from google.auth.transport import requests
 from extensions.my_firestore import store_post, retrieve_all_posts, retrieve_user, get_post, delete_post
 import google.oauth2.id_token
 
 app = Flask(__name__)
+
+# 
 
 def userSignedIn():
     id_token = request.cookies.get("token")
@@ -20,7 +22,7 @@ def userSignedIn():
                 id_token, firebase_request_adapter
             )
             
-            authenticated = retrieve_user(claims.get('user_id'))  
+            authenticated = retrieve_user(claims.get('user_id'))
                                             
         except ValueError as exc:
             error_message = str(exc)   
@@ -92,6 +94,9 @@ def post():
         private = request.form.get("private")
         user_id = verified["claims"]["user_id"]
         post_id = request.form.get("post_id", None)
+        
+        # if (post_id == None):
+        #     post_id = ""
         
         if not post_id == "":
             print(f"post_id: {post_id}")
@@ -165,7 +170,7 @@ def view_post(post_id):
     
  
     
-@app.route("/post/<int:post_id>/delete", methods=["POST"])
+@app.route("/post/<post_id>/delete", methods=["POST"])
 def dele_post(post_id):
     verified = userSignedIn()
     

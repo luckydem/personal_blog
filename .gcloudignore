@@ -13,10 +13,55 @@
 .git
 .gitignore
 
-# Python pycache:
-__pycache__/
 # Ignored by the build system
 /setup.cfg
 
 # Tailwindcss setup input.css
 /static/input.css
+
+# Exclude version control files
+.git/
+.gitignore
+
+# Exclude Python cache and virtual environments
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+.venv/
+env/
+
+# Exclude logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Exclude IDE/editor files
+.vscode/
+.idea/
+*.iml
+
+# Exclude test files and folders
+tests/
+*.spec
+*.test
+
+# Exclude documentation and non-essential files
+README.md
+docs/
+*.md
+
+# Exclude OS-generated files
+.DS_Store
+Thumbs.db
+
+# Exclude node_modules (if using Node.js tooling)
+node_modules/
+
+# Exclude build artifacts
+dist/
+build/
+
+# Add any other custom exclusions
+your_custom_folders/
