@@ -13,6 +13,7 @@ def store_post(post, userId):
         entity = db.collection("posts").document(post_id)
     else:
         entity = db.collection("posts").document()
+        
     entity.set(
         {
             "private": post["private"],
@@ -22,8 +23,7 @@ def store_post(post, userId):
             "userId": userId
         }
     )
-    
-    
+        
 def retrieve_all_posts():
     # potentially at this point, we could retrieve all posts except private posts when 
     # user is not logged in...
@@ -55,9 +55,18 @@ def delete_post(post_id):
     db.collection("posts").document(post_id).delete()
     
 
+def create_user(user_id, email, slug):
+    user_ref = db.collection("users").document(user_id)
+    user_ref.set(
+        {
+            "email": email,
+            "slug": slug
+        }
+    )
+
 def retrieve_user(user_id):
     user_ref = db.collection("users").document(user_id)
     user = user_ref.get()
     
-    return user.exists
+    return user
     

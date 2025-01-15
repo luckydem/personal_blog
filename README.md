@@ -189,6 +189,13 @@ For the MVP, I wanted it to have the following functionality:
 
       Okay so I'm going to have to change my approach and store the idToken on the server as part of flasks session - that way it cannot be hampered with and there is not "cookie" that can be messed with. Let me see if I can implement that.
 
+6. Refactoring and organising
+      As my application started to grow, I realised that it was becoming more and more "messy" with lots of files on the root and it started becoming more difficult to keep track of what was doing what. So I used ChatGPT to recommend a flask app structure, why __init__.py files are important, using flasks Blueprint for organising and modularization and because it came up in ChatGPT's responses, I also asked when to use forms.py and modules.py.
+      This led me down a bit of a rabbit hole but I definitely saw the benefits of everything that was recommended.
+      Therefore I have decided to restructure my application before moving forward.
+      I have firestore working now and had just started with a sign up via email workflow and storing additional user data on firestore.
+      I am going to get my app in it's current state to a "working" state and then start refactoring and organising based on the recommended Flask app organisational structures.
+
 # Resources
 
 - [CS50](https://cs50.harvard.edu/x/2024/) 

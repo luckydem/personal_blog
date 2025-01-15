@@ -11,33 +11,35 @@
 {% block main %}
     <form class="form-control" name="postForm" action="/post" method="post" onsubmit="return validateForm()">
         <!-- <div id="post"></div> -->
-        <div class="grid grid-cols-2 mb-3">
-            <input class="hidden" type="hidden" name="post_id" value="{{ post.post_id }}">
-            <h3 id="title-text">{{ post.title }}</h3>
-            {% if user_data %}
-                <input class="input input-bordered maxw mr-2 hidden" type="text" name="title" id="title" placeholder="Post Title" autofocus value="{{ post.title }}" disabled>           
+        <div class="mb-3">
+            {% if user_data %}                
                 <div class="form-control justify-self-end">
                     <label class="label cursor-pointer">
                         <span class="label-text pr-2">Set post to private</span>
                         <input type="checkbox" name="private" id="private" class="toggle" {{ post.private }} disabled>
                     </label>
                 </div>
+                <input class="input input-bordered maxw mr-2 hidden w-full" type="text" name="title" id="title" placeholder="Post Title" autofocus value="{{ post.title }}" disabled>
             {% endif %}
+            <h3 id="title-text" class="w-full px-4 h-12 py-2">{{ post.title }}</h3>
+            <input class="hidden" type="hidden" name="post_id" value="{{ post.post_id }}">
+            
         </div>
         
-        <textarea class="textarea textarea-bordered w-full h-96 mb-3" placeholder="Blog Post" name="post" id="post" readonly>{{ post.post }}</textarea>
+        <textarea
+            class="textarea w-full h-[calc(100vh-18rem)] resize-none mb-3"
+            placeholder="Blog Post"
+            name="post"
+            id="post"
+            readonly
+        >{{post.post}}</textarea>
         
         {% if user_data %}
-            <a href="/" class="btn btn-outline btn-secondary mb-2 hidden" id="cancel">CANCEL</a>
-            
+            <button class="btn btn-outline btn-secondary mb-2 hidden" id="cancel">CANCEL</button>
+            <button class="btn btn-outline btn-primary btn-block" id="edit">EDIT</button>
             <button class="btn btn-outline btn-primary hidden" id="submit" type="submit">SUBMIT</button>
         {% endif %}
-    </form>
-    {% if user_data %}
-        <button class="btn btn-outline btn-primary" id="edit">EDIT</button>
-    {% endif %}
-
-    
+    </form>    
 {% endblock %}
 
 <!-- Below block is to add page specific scripts -->
@@ -57,14 +59,14 @@
     <script>
         function validateForm(showAlert = true) {
 
-            const form = document.forms["postForm"]
-            const title = form["title"].value
-            const post = form["post"].value                         
+            const form = document.forms["postForm"];
+            const title = form["title"].value;
+            const post = form["post"].value;                    
 
             if ( (title === "" || post === "") && showAlert) {
                 
-                const alertModal = document.querySelector("#alertModal")
-                alertModal.showModal()
+                const alertModal = document.querySelector("#alertModal");
+                alertModal.showModal();
 
                 return false;
             }
@@ -89,16 +91,18 @@
 
             const titleInput = document.querySelector("#title");
             titleInput.removeAttribute("disabled");
-            titleInput.classList.remove("hidden")
+            titleInput.classList.remove("hidden");
 
-            const titleText = document.querySelector("#title-text")
-            titleText.classList.add("hidden")
+            const titleText = document.querySelector("#title-text");
+            titleText.classList.add("hidden");
 
             const privateChk = document.querySelector("#private");
             privateChk.removeAttribute("disabled");
 
             const post = document.querySelector("#post");
             post.removeAttribute("readonly");
+            post.classList.add("textarea-bordered");
+            post.focus();
 
             const cancelBtn = document.querySelector("#cancel");
             cancelBtn.classList.remove("hidden");
@@ -106,27 +110,67 @@
             const submitBtn = document.querySelector("#submit");
             submitBtn.classList.remove("hidden");
 
-            editView = true
+            editView = true;
         }
 
-        let editParam = false
-        let editView = false
-        const searchParams = new URLSearchParams(window.location.search)        
+        let editParam = false;
+        let editView = false;
+        const searchParams = new URLSearchParams(window.location.search);      
 
         if(searchParams.has("edit")) {
-            editParam = searchParams.get("edit")
-            console.log("edit param:", editParam)
+            editParam = searchParams.get("edit");
+            console.log("edit param:", editParam);
         }
 
         const editBtn = document.querySelector("#edit");
-        editBtn.addEventListener("click", () => {
-            console.log("edit Clicked")
-            editPost()
+        editBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            console.log("edit Clicked");            
+            editPost();
         });
 
         if (editParam) {
-            editPost()
+            editPost();
         }
+
+        function cancelEdit() {
+            
+            if(!editView) {
+                return;
+            }
+
+            const editBtn = document.querySelector("#edit");
+            editBtn.classList.remove("hidden");            
+
+            const titleInput = document.querySelector("#title");
+            titleInput.setAttribute("disabled", "");
+            titleInput.classList.add("hidden");
+
+            const titleText = document.querySelector("#title-text");
+            titleText.classList.remove("hidden");
+
+            const privateChk = document.querySelector("#private");
+            privateChk.setAttribute("disabled", "");
+
+            const post = document.querySelector("#post");
+            post.setAttribute("readonly", "");
+            post.classList.remove("textarea-bordered");
+
+            const cancelBtn = document.querySelector("#cancel");
+            cancelBtn.classList.add("hidden");
+
+            const submitBtn = document.querySelector("#submit");
+            submitBtn.classList.add("hidden");
+
+            editView = false;
+        }
+
+        const cancelBtn = document.querySelector("#cancel")
+        cancelBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            cancelEdit()
+        })
+
 
         {% endif %}
         
