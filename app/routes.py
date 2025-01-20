@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, render_template, request, redirect
-
+import uuid
 from .helpers import userSignedIn
 from .models import retrieve_all_posts, store_post, get_post, delete_post
 
@@ -21,8 +21,6 @@ def home():
         
         if raw_post["post"] == None:
             post = "Empty Post"
-        # elif len(raw_post["post"]) > 250:
-        #     post = raw_post["post"][:250] + "...[truncated]"
         else: post = raw_post["post"]
               
         title = raw_post.get("title", "Empty Title")
@@ -50,11 +48,32 @@ def home():
         return resp
     
 # submit post page
-@bp.route("/post", methods=["GET", "POST"])
+@bp.route("/post", methods=["GET"])
 def post():
     
     print("Navigating to /post")
+    verified = userSignedIn()        
+        
+    if verified.get('authenticated'):
+        # "Authenticated GET"
+        edit = request.args.get("edit")
+        post_id = str(uuid.uuid4())
+        ret_post = {"title": "","post": "", "private": "", "post_id": post_id}
+        resp = make_response(render_template("post.html", post=ret_post, show_alert=False, user_data=verified["claims"], edit=edit))
+    else:
+        # "Unauthenticated GET response"
+        resp = make_response(redirect("/"))
+        
+    return resp
+    
+# edit/read post
+@bp.route("/post/<post_id>", methods=["GET", "POST"])
+def view_post(post_id):
+    
     verified = userSignedIn()
+    authenticated = verified.get('authenticated')
+    
+    print(f"/post/{post_id}. Authenticated: {authenticated}")
     
     if request.method == "POST" and verified.get('authenticated'):        
         # POST
@@ -66,12 +85,7 @@ def post():
         user_id = verified["claims"]["user_id"]
         post_id = request.form.get("post_id", None)
         
-        # if (post_id == None):
-        #     post_id = ""
-        
-        if not post_id == "":
-            print(f"post_id: {post_id}")
-        
+        print(f"post_id: {post_id}")        
         print(f"Post private: {private}")        
         print(f"title: {title}")
         print(f"post: {post}")
@@ -91,53 +105,35 @@ def post():
         if not show_alert:
             store_post({"title": title, "post": post, "private": private, "post_id": post_id}, user_id)
           
-        resp = make_response(render_template("post.html", post=ret_post, show_alert=show_alert, user_data=verified["claims"], edit=show_alert))
+        return render_template("post.html", post=ret_post, show_alert=show_alert, user_data=verified["claims"], edit=show_alert)
         
-    elif request.method == "GET" and verified.get('authenticated'):
-        # "Authenticated GET"
-        edit = request.args.get("edit")
-        ret_post = {"title": "","post": "", "private": ""}
-        resp = make_response(render_template("post.html", post=ret_post, show_alert=False, user_data=verified["claims"], edit=edit))
     else:
-        # "Unauthenticated GET response"
-        resp = make_response(redirect("/"))
+    
+        complete_post = get_post(post_id)
         
-    return resp
-    
-# edit/read post
-@bp.route("/post/<post_id>", methods=["GET"])
-def view_post(post_id):
-    
-    verified = userSignedIn()
-    authenticated = verified.get('authenticated')
-    
-    print(f"/post/{post_id}. Authenticated: {authenticated}")
+        post_id = complete_post.id
+        complete_post = complete_post.to_dict()
         
-    complete_post = get_post(post_id)
-    
-    post_id = complete_post.id
-    complete_post = complete_post.to_dict()
-    
-    complete_post["post_id"] = post_id
-    
-    edit = False
-    private = False
-    
-    if (complete_post["private"]):
-        complete_post["private"] = "checked"
-        private = True
-    else:
-        complete_post["private"] = ""
+        complete_post["post_id"] = post_id
+        
+        edit = False
+        private = False
+        
+        if (complete_post["private"]):
+            complete_post["private"] = "checked"
+            private = True
+        else:
+            complete_post["private"] = ""
 
-    if request.args.get("edit") == "true" and authenticated:
-        edit = True        
-    
-    print(f"Edit: {edit}")
-    
-    if private and authenticated:
-        return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
-    else:
-        return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+        if request.args.get("edit") == "true" and authenticated:
+            edit = True        
+        
+        print(f"Edit: {edit}")
+        
+        if private and authenticated:
+            return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+        else:
+            return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
     
  
     
