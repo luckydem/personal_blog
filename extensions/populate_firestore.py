@@ -2,6 +2,7 @@ from google.cloud import firestore
 import requests
 import json
 import datetime
+import uuid
 
 
 # The `project` parameter is optional and represents which project the client
@@ -27,14 +28,17 @@ def populate_blogs():
         
     try:
         
-        for i in range(len(data)):
+        for i in range(len(data)):            
             post = data[i]
+            id = str(uuid.uuid4())
+            # print(f"post {i+1}: id: {id}. title: {post["title"]}")
+            
             
             post["date"] = datetime.datetime.fromisoformat(post["date"])
             
             post["image"] = post.get("image", get_unsplash_image())
                     
-            document = db.collection("posts").document()
+            document = db.collection("posts").document(id)
             batch.set(document, post)
             
         batch.commit()
@@ -60,10 +64,11 @@ def get_unsplash_image():
     # print(response.json())
     
     if response.status_code == 200:    
+        print(response.json()["urls"]["small"])
         return response.json()["urls"]["small"]
     else:
-        print(response.status_code)
+        print(f"Error: response code: {response.status_code}, Message: {response.text}")
         return None
     
-
-populate_blogs()
+get_unsplash_image()
+# populate_blogs()

@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block main %}
-    <form class="form-control" name="postForm" action="/post" method="post" onsubmit="return validateForm()">
+    <form class="form-control" name="postForm" action="/post/{{ post.post_id }}" method="post" onsubmit="return validateForm()">
         <!-- <div id="post"></div> -->
         <div class="mb-3">
             {% if user_data %}                
