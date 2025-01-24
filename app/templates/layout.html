@@ -187,6 +187,7 @@
             </div>
         </dialog>
 
+        <!-- Register Modal -->
         <dialog id="registerModal" class="modal">
             <div class="modal-box">
                 <form action="/register">
@@ -201,7 +202,7 @@
                           <path
                             d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                         </svg>
-                        <input type="text" class="grow" placeholder="Email" id="login-email"/>
+                        <input type="text" class="grow" placeholder="Email" id="register-email"/>
                       </label>      
                 </form>
                 <div class="modal-action">
@@ -210,9 +211,23 @@
                     </form>
                 </div>
             </div>
-
         </dialog>
 
+        <!-- Reusable Yes No Modal -->
+        <dialog id="yesnoModal" class="modal">
+            <div class="modal-box">                
+                <p id="yesnoModalText"></p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn btn-outline btn-primary">NO</button>
+                        <button class="btn btn-outline btn-secondary" id="yesnoModal_yes">YES</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>        
+
+        <!-- Toast div for feedback -->
+        <div class="toast"></div>
 
         {% block scripts %}{% endblock %}
     </body>

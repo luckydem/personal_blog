@@ -1,10 +1,18 @@
 from google.cloud import firestore
+from config import Config
 
-# Initialise Firestore Client
 # db = None
 
-# def init_app(app):
-#     global db
-#     db = firestore.Client("FIRESTORE_PROJECT")
+# def initialize_firestore(project_name):
+#     print(f"extensions/my_firestore.py --> initialize_firestore({project_name})")
+#     return firestore.Client(project=project_name)
 
-db = firestore.Client("my-personal-blog-cs50")
+# def set_firestore_client(project_name):
+#     print(f"extensions/my_firestore.py --> set_firestore_client({project_name})")
+#     global db
+#     db = initialize_firestore(project_name)
+#     print(f"extensions/my_firestore.py --> Firestore client initialized with project: {project_name}") 
+
+
+
+db = firestore.Client(Config.FIRESTORE_PROJECT)

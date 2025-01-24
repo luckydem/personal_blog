@@ -7,6 +7,9 @@ BASE_URL = "https://identitytoolkit.googleapis.com/v1/accounts"
 
 
 def sign_in_with_email_and_password(email, password):
+    
+    print(f"sign_in_with_email_and_password({email}, {password})")
+    
     request_type = ":signInWithPassword"
     url = f"{BASE_URL}{request_type}{API_KEY}"
 
@@ -24,6 +27,9 @@ def sign_in_with_email_and_password(email, password):
 
 
 def sign_up_with_email_and_password(email, password):
+    
+    print(f"sign_up_with_email_and_password({email}, {password})")
+    
     request_type = ":signUp"
     url = f"{BASE_URL}{request_type}{API_KEY}"
     

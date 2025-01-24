@@ -14,7 +14,9 @@ import uuid
 # doc_ref = db.collection("users").document("demianhauptle")
 # doc_ref.set({"first": "Demian", "last": "Hauptle", "born": 1985})
 
-def populate_blogs():    
+def populate_blogs():   
+    
+    print("populate_blogs()")
 
     db = firestore.Client()
     batch = db.batch()
@@ -51,6 +53,9 @@ def populate_blogs():
         return error
     
 def get_unsplash_image():
+    
+    print("get_unsplash_image()")
+    
     url = "https://api.unsplash.com/photos/random?client_id=_Qmfzy6iu5ozPXrKglsJjwlk-Yics0-xxEO-N9G-ogI"
     headers = {
         "Accept-Version": "v1"
@@ -70,5 +75,5 @@ def get_unsplash_image():
         print(f"Error: response code: {response.status_code}, Message: {response.text}")
         return None
     
-get_unsplash_image()
-# populate_blogs()
+# get_unsplash_image()
+populate_blogs()

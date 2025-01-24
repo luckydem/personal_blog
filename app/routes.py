@@ -1,12 +1,15 @@
-from flask import Blueprint, make_response, render_template, request, redirect
+from flask import Blueprint, make_response, render_template, request, redirect, jsonify, current_app
 import uuid
-from .helpers import userSignedIn
 from .models import retrieve_all_posts, store_post, get_post, delete_post
+from .helpers import userSignedIn
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/')
-def home():            
+def home():     
+    
+    print("app/routes.py --> home()")
+           
     # Verify Firebase auth.
     verified = userSignedIn()
     
@@ -47,11 +50,11 @@ def home():
         resp.delete_cookie(key='token')
         return resp
     
-# submit post page
+# create new post
 @bp.route("/post", methods=["GET"])
 def post():
     
-    print("Navigating to /post")
+    print("app/routes.py --> post()")
     verified = userSignedIn()        
         
     if verified.get('authenticated'):
@@ -59,16 +62,16 @@ def post():
         edit = request.args.get("edit")
         post_id = str(uuid.uuid4())
         ret_post = {"title": "","post": "", "private": "", "post_id": post_id}
-        resp = make_response(render_template("post.html", post=ret_post, show_alert=False, user_data=verified["claims"], edit=edit))
+        return render_template("post.html", post=ret_post, show_alert=False, user_data=verified["claims"], edit=edit)
     else:
         # "Unauthenticated GET response"
-        resp = make_response(redirect("/"))
-        
-    return resp
+        return redirect("/")
     
 # edit/read post
 @bp.route("/post/<post_id>", methods=["GET", "POST"])
 def view_post(post_id):
+    
+    print("app/routes.py --> view_post()")
     
     verified = userSignedIn()
     authenticated = verified.get('authenticated')
@@ -85,27 +88,21 @@ def view_post(post_id):
         user_id = verified["claims"]["user_id"]
         post_id = request.form.get("post_id", None)
         
-        print(f"post_id: {post_id}")        
-        print(f"Post private: {private}")        
-        print(f"title: {title}")
-        print(f"post: {post}")
-        
         if private == "on":
-                private_ret = "checked"
-                private = True
+            private = True
         else:
-            private_ret = ""
             private = False
             
-        ret_post = {"post": post, "title": title, "private": private_ret}
+        ret_post = {"post": post, "title": title, "private": private, "post_id": post_id}
         
         show_alert = title == "" or post == ""
-        print(f"show_alert Status: {show_alert}")
         
         if not show_alert:
             store_post({"title": title, "post": post, "private": private, "post_id": post_id}, user_id)
           
-        return render_template("post.html", post=ret_post, show_alert=show_alert, user_data=verified["claims"], edit=show_alert)
+        # return render_template("post.html", post=ret_post, show_alert=show_alert, user_data=verified["claims"], edit=show_alert)
+        
+        return jsonify({"post": ret_post, "show_alert": show_alert, "edit": show_alert})
         
     else:
     
@@ -128,22 +125,26 @@ def view_post(post_id):
         if request.args.get("edit") == "true" and authenticated:
             edit = True        
         
-        print(f"Edit: {edit}")
+        # print(f"Edit: {edit}")
         
         if private and authenticated:
-            return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+            # return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+            return jsonify({"post": complete_post, "show_alert": False, "user_data": verified["claims"], "edit": edit})
         else:
-            return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+            # return render_template("post.html", post=complete_post, show_alert=None, user_data=verified["claims"], edit=edit)
+            return jsonify({"post": complete_post, "show_alert": False, "user_data": verified["claims"], "edit": edit})
+      
+@bp.route("/post/<post_id>/delete", methods=["DELETE"])
+def delete_post_api(post_id):
     
- 
+    print("app/routes.py --> delete_post_api()")
     
-@bp.route("/post/<post_id>/delete", methods=["POST"])
-def dele_post(post_id):
     verified = userSignedIn()
-    
-    print(f"DELETE. post_id: {post_id}")
-    
-    if request.method == "POST" and verified.get("authenticated"):
-        delete_post(post_id)
+        
+    if request.method == "DELETE" and verified.get("authenticated"):
+        print(f"DELETING post_id: {post_id}")
+        deleted_post = delete_post(post_id)
+        return {"post_id": post_id, "deleted": True, "message": deleted_post}
 
-    return redirect("/")
+    else:
+        return {"message": "Could not delete"}
