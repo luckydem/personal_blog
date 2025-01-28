@@ -72,6 +72,13 @@
   gcloud config get-value project
   ```
 
+### Scripts for interacting with firestore
+
+from root, run these commands
+
+* Populate firestore: `python3 -m utilities.populate_firestore`
+* Move posts to a different collection in firestore: `python3 -m utilities.move_posts_to_new_collection --from_coll "from_posts_name" --to_coll "to_posts_name"`
+
 # MY PERSONAL BLOG
 #### Video Demo: [youtube-link]()
 #### Description

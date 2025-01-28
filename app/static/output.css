@@ -2729,6 +2729,8 @@ html {
   border-bottom-left-radius: 0px;
 }
 
+/* Custom badges for tags */
+
 .my-badge {
   margin: 0.25rem;
   display: inline-flex;
@@ -2812,6 +2814,22 @@ html {
   line-height: 1;
 }
 
+/* custom input disabled styling for form post */
+
+#title-input::-moz-placeholder{
+  background-color: inherit !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  border-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity))) !important;
+}
+
+#title-input:disabled, #title-input[disabled], #title-input::placeholder{
+  background-color: inherit !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  border-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity))) !important;
+}
+
 .static {
   position: static;
 }
@@ -2836,16 +2854,16 @@ html {
   right: 0px;
 }
 
-.top-\[4rem\] {
-  top: 4rem;
-}
-
 .right-2 {
   right: 0.5rem;
 }
 
 .top-2 {
   top: 0.5rem;
+}
+
+.top-\[4rem\] {
+  top: 4rem;
 }
 
 .z-10 {
@@ -2929,20 +2947,20 @@ html {
   height: 1rem;
 }
 
-.h-\[calc\(100vh-18rem\)\] {
-  height: calc(100vh - 18rem);
-}
-
 .h-\[calc\(100vh-12rem\)\] {
   height: calc(100vh - 12rem);
 }
 
-.h-full {
-  height: 100%;
+.h-\[calc\(100vh-18rem\)\] {
+  height: calc(100vh - 18rem);
 }
 
 .h-\[calc\(80vh-18rem\)\] {
   height: calc(80vh - 18rem);
+}
+
+.h-full {
+  height: 100%;
 }
 
 .max-h-28 {
@@ -2969,10 +2987,6 @@ html {
   width: 100%;
 }
 
-.w-11\/12 {
-  width: 91.666667%;
-}
-
 .min-w-\[15rem\] {
   min-width: 15rem;
 }
@@ -2983,10 +2997,6 @@ html {
 
 .max-w-\[30rem\] {
   max-width: 30rem;
-}
-
-.max-w-5xl {
-  max-width: 64rem;
 }
 
 .flex-1 {

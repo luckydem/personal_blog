@@ -75,14 +75,14 @@
                         </div>
                         <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-200 rounded-box z-20 mt-3 w-52 p-2 shadow"> 
                             <li class="px-2">{{ user_data.get('name', user_data.get('email'))}}</li>                                      
-                            <li class="px-2"><a class="" href="/post?edit=true">Create Post</a></li>
+                            <li class="px-2"><a class="" id="create-post">Create Post</button></li>
                             <li class="px-2"><a class="" id="sign-out">Logout</a></li>                   
                         </ul>
                     </div>
                    
                 {% else %}
                     <ul class="menu menu-horizontal px-1">
-                        <li class="px-2"><button class="btn btn-sm" id="sign-in" onclick="return signInModal.showModal()">Login</button></li>
+                        <li class="px-2"><button class="btn btn-sm" id="sign-in">Login</button></li>
                     </ul>
                 {% endif %}
 
@@ -111,7 +111,7 @@
 
         
         <!-- Sign In Modal -->
-        <dialog id="signInModal" class="modal">
+        <dialog id="sign-in-modal" class="modal">
             <div class="modal-box">                
                 <!-- <div id="firebaseui-auth-container"></div> -->
                 <div class="flex justify-center">                    
@@ -214,13 +214,13 @@
         </dialog>
 
         <!-- Reusable Yes No Modal -->
-        <dialog id="yesnoModal" class="modal">
+        <dialog id="yes-no-modal" class="modal">
             <div class="modal-box">                
-                <p id="yesnoModalText"></p>
+                <p id="yes-no-modal-text"></p>
                 <div class="modal-action">
                     <form method="dialog">
                         <button class="btn btn-outline btn-primary">NO</button>
-                        <button class="btn btn-outline btn-secondary" id="yesnoModal_yes">YES</button>
+                        <button class="btn btn-outline btn-secondary" id="yes-no-modal-yes-btn">YES</button>
                     </form>
                 </div>
             </div>

@@ -1,8 +1,9 @@
-from google.cloud import firestore
+from extensions.my_firestore import db
 import requests
 import json
 import datetime
 import uuid
+from config import config
 
 
 # The `project` parameter is optional and represents which project the client
@@ -14,18 +15,21 @@ import uuid
 # doc_ref = db.collection("users").document("demianhauptle")
 # doc_ref.set({"first": "Demian", "last": "Hauptle", "born": 1985})
 
+
+
 def populate_blogs():   
     
     print("populate_blogs()")
 
-    db = firestore.Client()
     batch = db.batch()
+    
+    post_collection = config["development"].POSTS
     
     # db.collection("posts").document("MLOTHzQFEXRQHa4GpMLv2ywiWVv2")
 
     # upload_list = list()
 
-    with open("../data/blog_entries.json", 'r') as file:
+    with open("sample_data/blog_entries.json", 'r') as file:
         data = json.load(file)
         
     try:
@@ -40,7 +44,7 @@ def populate_blogs():
             
             post["image"] = post.get("image", get_unsplash_image())
                     
-            document = db.collection("posts").document(id)
+            document = db.collection(post_collection).document(id)
             batch.set(document, post)
             
         batch.commit()
@@ -54,7 +58,7 @@ def populate_blogs():
     
 def get_unsplash_image():
     
-    print("get_unsplash_image()")
+    # print("get_unsplash_image()")
     
     url = "https://api.unsplash.com/photos/random?client_id=_Qmfzy6iu5ozPXrKglsJjwlk-Yics0-xxEO-N9G-ogI"
     headers = {
@@ -69,7 +73,7 @@ def get_unsplash_image():
     # print(response.json())
     
     if response.status_code == 200:    
-        print(response.json()["urls"]["small"])
+        # print(response.json()["urls"]["small"])
         return response.json()["urls"]["small"]
     else:
         print(f"Error: response code: {response.status_code}, Message: {response.text}")

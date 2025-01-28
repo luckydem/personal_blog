@@ -9,8 +9,7 @@
 {% endblock %}
 
 {% block main %}
-    <form class="form-control" name="postForm" action="/post/{{ post.post_id }}" method="post" onsubmit="return validateForm()">
-        <!-- <div id="post"></div> -->
+    <form class="form-control" name="post-form" action="/post/{{ post.post_id }}" method="post" onsubmit="return validateForm()">
         <div class="mb-3">
             {% if user_data %}                
                 <div class="form-control justify-self-end">
@@ -22,7 +21,7 @@
                 <input class="input input-bordered maxw mr-2 hidden w-full" type="text" name="title" id="title" placeholder="Post Title" autofocus value="{{ post.title }}" disabled>
             {% endif %}
             <h3 id="title-text" class="w-full px-4 h-12 py-2">{{ post.title }}</h3>
-            <input class="hidden" type="hidden" name="post_id" value="{{ post.post_id }}">
+            <input class="hidden" type="hidden" name="post-id" value="{{ post.post_id }}">
             
         </div>
         
@@ -45,7 +44,7 @@
 <!-- Below block is to add page specific scripts -->
 {% block scripts %}
 
-    <dialog id="alertModal" class="modal">
+    <dialog id="alert-modal" class="modal">
         <div class="modal-box">
             <h3 class="text-lg font-bold">Name and Blog post cannot be blank</h3>
             <div class="modal-action">
@@ -59,13 +58,13 @@
     <script>
         function validateForm(showAlert = true) {
 
-            const form = document.forms["postForm"];
+            const form = document.forms["post-form"];
             const title = form["title"].value;
             const post = form["post"].value;                    
 
             if ( (title === "" || post === "") && showAlert) {
                 
-                const alertModal = document.querySelector("#alertModal");
+                const alertModal = document.querySelector("#alert-modal");
                 alertModal.showModal();
 
                 return false;

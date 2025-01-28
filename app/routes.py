@@ -86,7 +86,7 @@ def view_post(post_id):
         post = request.form.get("post")
         private = request.form.get("private")
         user_id = verified["claims"]["user_id"]
-        post_id = request.form.get("post_id", None)
+        post_id = request.form.get("post-id", None)
         
         if private == "on":
             private = True

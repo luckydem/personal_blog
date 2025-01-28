@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+
+    /* Custom badges for tags */
+
     .my-badge {
         @apply border rounded-e-full rounded-s-full m-1 inline-flex justify-center items-center px-2 text-base
     }
@@ -43,4 +46,12 @@
         @apply px-4 py-2 text-6xl
     }
 
+    /* custom input disabled styling for form post */
+
+    #title-input:disabled, #title-input[disabled], #title-input::placeholder{
+        background-color: inherit !important;
+        color: inherit !important;
+        opacity: 1 !important;
+        border-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity))) !important;
+    }
 }

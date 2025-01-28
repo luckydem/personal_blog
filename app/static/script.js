@@ -1,11 +1,49 @@
 window.addEventListener('load', function () {
 
     document.addEventListener("click", (e) => {
-        if (e.target.id === "sign-out") {
+        const target = e.target
+
+        if (target.closest("#sign-out")) {
           e.preventDefault();
           firebase.auth().signOut();
           location.reload();
-        }        
+        }       
+        
+        if (target.closest("#sign-in")) {
+          e.preventDefault();
+          const signInModal = document.getElementById("sign-in-modal");
+          signInModal.showModal();
+        }
+
+        if(target.closest(".view-post")) {
+          e.preventDefault();
+          const id = target.closest(".view-post").id.split("view-")[1];
+          fetchPost(id);
+        }
+
+        if (target.closest("#create-post")) {
+          e.preventDefault();
+          resetPostForm();
+          
+          if (!editMode){
+            toggleEditPost();
+          }
+
+          const postViewModal = document.getElementById("post-view-modal");
+          postViewModal.showModal();
+        }
+
+        if (target.closest("#edit-post") || target.closest("#cancel-edit-post")) {
+          e.preventDefault();
+
+          toggleEditPost();
+        }
+
+        if (target.closest(".delete-post")) {
+          e.preventDefault();          
+          const id = target.closest(".delete-post").id.split("del-")[1];
+          showYesNoModal(text="Are you sure you want to delete this post?", action=`deletePost('${id}')`);
+        }
     })    
   
     firebase.auth().onAuthStateChanged(function (user) {      
@@ -44,7 +82,7 @@ window.addEventListener('load', function () {
     const emailLoginForm = document.querySelector('#login-form')
     emailLoginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const signInModal = document.querySelector("#signInModal")
+      const signInModal = document.querySelector("#sign-in-modal")
       signInModal.removeAttribute("open")
       const email = document.querySelector('#login-email').value;
       const password = document.querySelector('#login-password').value;
@@ -58,51 +96,11 @@ window.addEventListener('load', function () {
           console.error('Error during login:', error);
         })
     })
-
-    // Add event listeners to each delete button
-    const deletePostBtns = document.querySelectorAll(".delete_post");
-    deletePostBtns.forEach((delBtn) => {
-      delBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        id = del.id.split("del_")[1];
-        showYesNoModal(text="Are you sure you want to delete this post?", action=`deletePost('${id}')`);
-      })
-    })
-
-    // Add event listeners to each "view post" button and fetch the posts data
-    const viewPostBtn = document.querySelectorAll(".view_post");
-    viewPostBtn.forEach((viewBtn) => {
-      viewBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        id = viewBtn.id.split("view_")[1];
-        fetchPost(id);
-      })
-    })
-
-    // Add event listeners for post edit and cancel
-    const editBtn = document.getElementById("editPost");
-    if (editBtn !== null) {
-      editBtn.addEventListener("click", (e) => {
-        e.preventDefault()
-        console.log("edit Clicked");            
-        toggleEditPost();
-      });
-    }
-    
-
-    const cancelBtn = document.getElementById("cancelEditPost")
-    if (cancelBtn !== null) {
-      cancelBtn.addEventListener("click", (e) => {
-        e.preventDefault()
-        toggleEditPost()
-      })
-    }
-    
 });
 
 function validateForm(showAlert = true) {
 
-  const form = document.forms["postForm"];
+  const form = document.forms["post-form"];
   const title = form["title"].value;
   const post = form["post"].value;                    
 
@@ -116,21 +114,32 @@ function validateForm(showAlert = true) {
 
 }
 
+function resetPostForm() {
+  postForm = document.forms["post-form"];
+  postForm.reset();
+  postForm.action = "/post";
+  postForm["post-id"].value = "";
+  // document.getElementById("title-header").innerHTML = "";
+}
+
 function showPost(post) {
-  const postViewModal = document.getElementById("postViewModal");
-  const form = document.forms["postForm"];
+  if (editMode) {
+    toggleEditPost()
+  }
+  const postViewModal = document.getElementById("post-view-modal");
+  const form = document.forms["post-form"];
   postViewModal.querySelector(".spinner").classList.add("hidden");  
   form.action = `/post/${post.post_id}`;
   form.classList.remove("hidden");
   // console.log(form.elements);
-  document.getElementById("titleHeader").innerHTML = post.title;
+  // document.getElementById("title-header").innerHTML = post.title;
 
   if (form.private) {
     form.private.checked = post.private;
   }
   
   form.title.value = post.title;
-  form.post_id.value = post.post_id;
+  form["post-id"].value = post.post_id;
   form.post.value = post.post;
 
 }
@@ -142,7 +151,7 @@ function submitForm(event) {
     return false;
   }
 
-  const postViewModal = document.getElementById("postViewModal");
+  const postViewModal = document.getElementById("post-view-modal");
   postViewModal.querySelector(".spinner").classList.remove("hidden");
 
   const form = event.target
@@ -185,8 +194,8 @@ function submitForm(event) {
 }
 
 function fetchPost(id) {
-  const postViewModal = document.getElementById("postViewModal");
-  const form = document.forms["postForm"];
+  const postViewModal = document.getElementById("post-view-modal");
+  const form = document.forms["post-form"];
   form.classList.add("hidden");
   postViewModal.querySelector(".spinner").classList.remove("hidden"); 
   postViewModal.showModal();
@@ -209,19 +218,20 @@ function fetchPost(id) {
     .catch(error => console.error("Error:", error));
 }
 
+let editMode = false;
 function toggleEditPost() {            
 
-  const editBtn = document.getElementById("editPost");
+  const editBtn = document.getElementById("edit-post");
   editBtn.classList.toggle("hidden");
 
-  const titleInput = document.getElementById("titleInput");
-  titleInput.removeAttribute("disabled");
-  titleInput.classList.toggle("hidden");
+  const titleInput = document.getElementById("title-input");
+  titleInput.toggleAttribute("disabled");
+  titleInput.classList.toggle("input-bordered");
 
-  const titleHeader = document.getElementById("titleHeader");
-  titleHeader.classList.toggle("hidden");
+  // const titleHeader = document.getElementById("title-header");
+  // titleHeader.classList.toggle("hidden");
 
-  const privateChk = document.getElementById("privatePost");
+  const privateChk = document.getElementById("private-post");
   privateChk.toggleAttribute("disabled");
 
   const post = document.getElementById("post");
@@ -231,19 +241,21 @@ function toggleEditPost() {
     post.focus();
   }  
 
-  const cancelBtn = document.getElementById("cancelEditPost");
+  const cancelBtn = document.getElementById("cancel-edit-post");
   cancelBtn.classList.toggle("hidden");
 
-  const submitBtn = document.getElementById("submitPost");
+  const submitBtn = document.getElementById("submit-post");
   submitBtn.classList.toggle("hidden");
+
+  editMode = !editMode;
 }
 
 function showYesNoModal(text, action) {
   
-  const yesNoModal = document.getElementById("yesnoModal");
-  const yesNoModalTextEle = document.getElementById("yesnoModalText");
+  const yesNoModal = document.getElementById("yes-no-modal");
+  const yesNoModalTextEle = document.getElementById("yes-no-modal-text");
   yesNoModalTextEle.innerHTML = text
-  yesNoModalYesBtn = document.getElementById("yesnoModal_yes")
+  yesNoModalYesBtn = document.getElementById("yes-no-modal-yes-btn")
   yesNoModalYesBtn.setAttribute("onClick", action)
   yesNoModal.showModal()
 
@@ -301,7 +313,7 @@ function deletePost(id) {
 
 async function googleSignIn() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  const signInModal = document.querySelector("#signInModal")
+  const signInModal = document.querySelector("#sign-in-modal")
   signInModal.removeAttribute("open")
   try {
       const result = await firebase.auth().signInWithPopup(provider);
